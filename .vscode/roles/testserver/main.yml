@@ -1,0 +1,13 @@
+ tasks:
+  -  name: updates the server
+     command: yum update -y
+  -  name: install httpd serve
+     yum:
+       name: httpd
+       state: running
+
+  -   name: ensure httpd is runnig
+      service:
+        name: httpd
+        state: started
+        enabled: yes

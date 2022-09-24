@@ -1,0 +1,19 @@
+---
+
+- hosts: webservers
+  become: true
+  
+  roles:
+    - webserver
+
+- hosts: dbservers
+  become: true
+
+  roles:
+    - dbserver
+
+- hosts: testservers
+  become: true
+
+  roles: 
+    - testserver

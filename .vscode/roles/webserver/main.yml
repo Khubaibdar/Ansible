@@ -1,0 +1,8 @@
+ tasks:
+    - name: installing Nfs Server
+      state: installed
+    - name: ensure nfs server is runnig
+      service:
+        name: nfs-server
+        state: started
+        enabled: yes

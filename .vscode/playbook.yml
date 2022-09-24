@@ -1,0 +1,42 @@
+---
+
+- hosts: webservers
+  become: true
+  
+  tasks:
+    - name: installing Nfs Server
+      state: installed
+    - name: ensure nfs server is runnig
+      service:
+        name: nfs-server
+        state: started
+        enabled: yes
+
+- hosts: dbservers
+  become: true
+
+  tasks:
+    - name: copying file from master to slave
+      copy:
+        source: /home/centos/myfile
+        dest: /home/centos/myfile
+        owner: centos
+        group: centos
+        mode: '0644'
+
+- hosts: testservers
+  become: true
+
+  tasks:
+  -  name: updates the server
+     command: yum update -y
+  -  name: install httpd serve
+     yum:
+       name: httpd
+       state: running
+
+  -   name: ensure httpd is runnig
+      service:
+        name: httpd
+        state: started
+        enabled: yes
